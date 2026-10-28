@@ -1,0 +1,50 @@
+name: Validate and publish FIPS-Net sites
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install signing dependency
+        run: python -m pip install "cryptography>=42.0"
+      - name: Validate names and site files
+        run: python tools/validate_registry.py
+      - name: Build release snapshot
+        env:
+          FIPS_SIGNING_PRIVATE_KEY_B64: ${{ secrets.FIPS_SIGNING_PRIVATE_KEY_B64 }}
+          FIPS_SIGNING_KEY_ID: ${{ vars.FIPS_SIGNING_KEY_ID }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: python tools/build_snapshot.py
+      - name: Publish snapshot to FIPS/1 node
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          FIPS_NODE_HOST: ${{ vars.FIPS_NODE_HOST }}
+          FIPS_NODE_PORT: ${{ vars.FIPS_NODE_PORT }}
+          FIPS_SIGNING_PRIVATE_KEY_B64: ${{ secrets.FIPS_SIGNING_PRIVATE_KEY_B64 }}
+        run: |
+          if [ -z "$FIPS_NODE_HOST" ] || [ -z "$FIPS_SIGNING_PRIVATE_KEY_B64" ]; then
+            echo "FIPS_NODE_HOST or signing secret is not set; snapshot was built but not published."
+            exit 0
+          fi
+          python tools/publish_snapshot.py dist/snapshot.zip
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fips-net-release-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14

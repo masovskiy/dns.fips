@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The home page of FIPS-Net, an experimental independent network.">
+  <title>FIPS-Net — First</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="fips://first.fips/" aria-label="FIPS-Net home"><span class="mark">F</span><span>FIPS<span class="muted">-Net</span></span></a>
+    <span class="network-status"><i></i> Network home</span>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">FREE INTERNET PROTOCOL SERVICE</p>
+      <h1>Your browser.<br><span>More networks.</span></h1>
+      <p class="lead">FIPS-Net is an experimental network for sites with native <code>.fips</code> names. Sites can be distributed through FIPS nodes without using HTTPS as their runtime content transport.</p>
+      <div class="address"><span class="address-label">FIPS ADDRESS</span><code>fips://first.fips/</code></div>
+    </section>
+    <section class="grid" aria-label="Network features">
+      <article class="tile"><span class="tile-icon">01</span><h2>FIPS-Net sites</h2><p>Open native sites by name, with page files distributed by FIPS nodes.</p></article>
+      <article class="tile"><span class="tile-icon">02</span><h2>Public registry</h2><p>Discover published names from a verifiable, replicated directory.</p></article>
+      <article class="tile"><span class="tile-icon">03</span><h2>Content integrity</h2><p>Signed manifests and content hashes help detect modified site files.</p></article>
+    </section>
+    <section class="how">
+      <h2>Publish your first site</h2>
+      <p>Add an <code>index.html</code> and any local assets to <code>sites/name.fips/</code>, add a record to <code>registry.json</code>, and submit a pull request to the public registry.</p>
+      <p class="note">FIPS-Net is experimental. A public FIPS node must host the published snapshot for other people to access it.</p>
+    </section>
+  </main>
+  <footer><span>FIPS-Net · experimental network</span><span>Transport: FIPS/1 · TCP</span></footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "registry_name": "FIPS-Net Public Registry",
+  "entries": {
+    "first.fips": {
+      "type": "site",
+      "path": "sites/first.fips",
+      "owner": "fips-core",
+      "description": "FIPS-Net home page; reserved for the project"
+    },
+    "hello.fips": {
+      "type": "site",
+      "path": "sites/hello.fips",
+      "owner": "community-example",
+      "description": "Example community static site"
+    },
+    "youtube.fips": {
+      "type": "redirect",
+      "target": "https://www.youtube.com/",
+      "owner": "example-only",
+      "description": "Optional external web alias; not a FIPS-Net hosted site"
+    }
+  }
+}

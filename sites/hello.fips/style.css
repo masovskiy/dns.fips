@@ -1,0 +1,14 @@
+:root { color-scheme: dark; --bg: #0b1020; --panel: #152039; --stroke: #2a3b5d; --text: #f4f7ff; --muted: #aebbd3; --purple: #a78bfa; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(ellipse at top left, #202d57, var(--bg) 55%); color: var(--text); font: 1rem/1.7 system-ui, sans-serif; }
+main { width: min(760px, calc(100% - 32px)); margin: 12vh auto; }
+.tag { color: #67e8f9; font-weight: 800; font-size: .75rem; letter-spacing: .15em; }
+h1 { font-size: clamp(3rem, 9vw, 5rem); line-height: 1; letter-spacing: -.05em; }
+h1 span { color: var(--purple); }
+p { color: var(--muted); }
+.card { margin-top: 28px; border: 1px solid var(--stroke); background: #152039cc; border-radius: 16px; padding: 22px; }
+.card strong { color: var(--text); }
+.card p { margin-bottom: 0; }
+code { color: #67e8f9; }
+a { color: var(--purple); }
+.small { margin-top: 32px; font-size: .85rem; }

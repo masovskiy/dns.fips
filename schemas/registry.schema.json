@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FIPS-Net Registry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_name",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "registry_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "entries": {
+      "type": "object",
+      "maxProperties": 10000,
+      "propertyNames": {
+        "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+fips$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "type",
+          "owner",
+          "description"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "site",
+              "redirect"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    }
+  }
+}
